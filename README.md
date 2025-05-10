@@ -8,4 +8,4 @@ npm start
 ```
 
 # Tools
- - Frontend: javascript, react, tailwind CSS
+ - Frontend: javascript, react, MUI
