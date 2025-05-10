@@ -5,19 +5,23 @@ import Test from './routing/Test';
 import './App.css';
 
 import * as React from 'react';
+import { useLocation } from "react-router-dom";
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
+import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import HomeIcon from '@mui/icons-material/Home';
+import InboxIcon from '@mui/icons-material/Inbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 240;
@@ -37,7 +41,7 @@ function App() {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Permanent drawer
+            AI News Summary
           </Typography>
         </Toolbar>
       </AppBar>
@@ -58,17 +62,22 @@ function App() {
 
         <Divider />
 
-        <List>
+        <List
+          subheader={<ListSubheader sx={{display: 'flex' }}>Menu</ListSubheader>}
+        >
           {Object.keys(routing).map((key, index) => (
             <ListItem key={key} disablePadding>
-              <a href={routing[key]}>
-              <ListItemButton>
+              <ListItemButton 
+                href={routing[key]} 
+                variant="outlined" 
+                size="large" 
+                sx={{width: drawerWidth}}
+              >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <HomeIcon /> : <MailIcon />}
                 </ListItemIcon>
                 <ListItemText primary={key} />
               </ListItemButton>
-              </a>
             </ListItem>
           ))}
         </List>
@@ -91,7 +100,7 @@ function App() {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3,  width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Router>
           <Routes>
