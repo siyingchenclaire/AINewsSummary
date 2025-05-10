@@ -6,3 +6,6 @@ A project led by Siying Chen. It is a full-stack project with a Javascript front
 npm start
 // ctrl + c to stop
 ```
+
+# Tools
+ - Frontend: javascript, react, tailwind CSS
