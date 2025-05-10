@@ -3,6 +3,7 @@
     "private": true,
     "scripts": {
       "start": "npm --prefix frontend start",
-      "start frontend": "npm --prefix frontend start"
+      "start frontend": "npm --prefix frontend start",
+      "setup": "npm install && npm install --prefix frontend && npm install --prefix backend"
     }
   }
