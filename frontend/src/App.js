@@ -23,6 +23,8 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import InboxIcon from '@mui/icons-material/Inbox';
 import MailIcon from '@mui/icons-material/Mail';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 240;
 const routing = {
@@ -58,7 +60,17 @@ function App() {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
 
         <Divider />
 
@@ -84,7 +96,9 @@ function App() {
 
         <Divider />
 
-        <List>
+        <List
+          subheader={<ListSubheader sx={{display: 'flex' }}>Newsletter</ListSubheader>}
+        >
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
