@@ -11,14 +11,3 @@ npm start
 # Tools
  - Frontend: javascript, react, MUI
 
-# Plans
- - Figma intro, design frontend, README intro
- - ML script walkthrough, coding session
- - ML script walkthrough, coding session
- - Git project structure walkthrough, RESTful API intro
- - Python backend server intro
- - Web-crawling intro
- - Final project setup
- - Figma project structure session
- - Future plans, TBD
-
