@@ -11,3 +11,10 @@ npm start
 # Tools
  - Frontend: javascript, react, MUI
 
+# Responsibilities
+ - Front end design: Siying
+ - Front end development: Yichen
+ - Back end design & development: Siying
+
+# Front End Design
+
