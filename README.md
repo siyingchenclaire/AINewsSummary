@@ -1,36 +1,15 @@
-# Description
-A project led by Siying Chen. It is a full-stack project with a Javascript front end and a Python Flask back end, with an AI-powered agent that collects daily news from various news sites.
-
-# Local Start
-```
-npm run setup // script to install all packages
-npm start
-// ctrl + c to stop
-```
-
-# Tools
- - Frontend: javascript, react, MUI
-
-# Responsibilities
- - Front end design: Siying
- - Front end development: Yichen
- - Back end design & development: Siying
-
-# Front End Design
-
-
-
 # TechPulse AI: Strategic Intelligence Assistant
 
 ## Overview
 TechPulse AI is an AI-powered chatbot designed for the CEO office of technology companies. Its core purpose is to provide daily strategic intelligence on tech news by automatically tracking, summarizing, and generating insights. This helps strategic analysts and decision-makers stay informed with real-time information for faster, smarter decisions.
+
+![System Design](./frontend/public/system.png)
 
 ## Who is it for?
 CEOs and Executive Assistants
 Strategic and Investment Analysts
 Market Researchers
 Product and Technology Decision-makers
-
 
 ## Key Features
 TechPulse AI helps you cut through information overload and get to the insights that matter:
@@ -56,3 +35,18 @@ Security: Designed with enterprise-grade security, including OAuth/SSO and GDPR 
 
 ## Getting Started
 To run the news aggregation script (as provided separately), ensure you have the necessary Python dependencies installed from the requirements.txt file.
+
+```
+npm run setup // script to install all packages
+npm start
+// ctrl + c to stop
+```
+
+## Tools
+ - Front end: Javascript, React, MUI, RESTful API
+ - Back end: Python Flask, Beautifulsoup, Selenium, RESTful API
+
+## Responsibilities
+ - Front end design: Siying
+ - Front end development: Yichen
+ - Back end design & development: Siying
