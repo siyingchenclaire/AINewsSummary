@@ -5,9 +5,7 @@ import Test from './routing/Test';
 import './App.css';
 
 import * as React from 'react';
-import { useLocation } from "react-router-dom";
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
@@ -20,17 +18,38 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
-import InboxIcon from '@mui/icons-material/Inbox';
-import MailIcon from '@mui/icons-material/Mail';
+import Icon from '@mui/material/Icon';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 const routing = {
-  'Home':'/',
-  'About':'/about',
-  'Test':'/test'
+  'News Feed':{
+    'routing': '/',
+    'logo': 'feed.svg'
+  },
+  'Subscription':{
+    'routing': '/',
+    'logo': 'subscription.svg'
+  },
+  'Reports':{
+    'routing': '/',
+    'logo': 'report.svg'
+  },
+  'Intelligence Cards':{
+    'routing': '/',
+    'logo': 'intelligence.svg'
+  }
+}
+const topics = {
+  'Artificial Intelligence':'',
+  'Semiconductors':'',
+  'Cloud Computing':'',
+  'Cybersecurity':''
 }
 
 function App() {
@@ -39,12 +58,39 @@ function App() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        sx={{ 
+          width: `100%`, 
+          margin: '0',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor:'#0d47a1',
+        }}
       >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            AI News Summary
-          </Typography>
+        <Toolbar sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Box sx={{display: 'flex', flexDirection: 'row'}}>
+            <Icon sx={{marginRight:'20px'}}>
+              <img src='pulse.svg' />
+            </Icon>
+            <Typography variant="h6" noWrap component="div">
+              Tech Pulse AI
+            </Typography>
+          </Box>
+          <Box sx={{display: 'flex', }}>
+            <Paper
+              component="form"
+              sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400}}
+              variant="outlined"
+            >
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search..."
+                inputProps={{ 'aria-label': 'search bar' }}
+              />
+              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+            <AccountCircleIcon />
+          </Box>
         </Toolbar>
       </AppBar>
       
@@ -54,39 +100,28 @@ function App() {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
+            boxSizing: 'border-box'
+          }
         }}
         variant="permanent"
         anchor="left"
       >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
         </Toolbar>
 
         <Divider />
 
-        <List
-          subheader={<ListSubheader sx={{display: 'flex' }}>Menu</ListSubheader>}
-        >
+        <List>
           {Object.keys(routing).map((key, index) => (
             <ListItem key={key} disablePadding>
               <ListItemButton 
-                href={routing[key]} 
+                href={routing[key].routing} 
                 variant="outlined" 
                 size="large" 
                 sx={{width: drawerWidth}}
               >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <HomeIcon /> : <MailIcon />}
+                    <img src={routing[key].logo} />
                 </ListItemIcon>
                 <ListItemText primary={key} />
               </ListItemButton>
@@ -97,14 +132,20 @@ function App() {
         <Divider />
 
         <List
-          subheader={<ListSubheader sx={{display: 'flex' }}>Newsletter</ListSubheader>}
+          subheader={<ListSubheader sx={{display: 'flex' }}>Topics</ListSubheader>}
         >
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {Object.keys(topics).map((text, index) => (
+            <ListItem key={text} sx={{
+              border:1, 
+              borderColor: 'grey.300', 
+              marginLeft: "15px", 
+              marginRight: "15px",
+              marginTop: "5px",
+              marginBottom: "5px",
+              borderRadius: '10px',
+              width: `calc(${drawerWidth}px - 30px)`
+            }} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
@@ -114,7 +155,12 @@ function App() {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3,  width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        sx={{ flexGrow: 1, 
+          bgcolor: 'background.default', 
+          p: 3,  
+          width: `calc(100% - ${drawerWidth}px)`, 
+          ml: `${drawerWidth}px`
+        }}
       >
         <Router>
           <Routes>
