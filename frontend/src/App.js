@@ -159,7 +159,7 @@ function App() {
         >
           <Divider sx={{width: '80%', marginLeft: '10%'}}/>
           <Typography sx={{paddingTop:1}} color="textSecondary">PATENT Certificate</Typography>
-          <Typography sx={{paddingBottom:2}} fontSize='small' color="textDisabled">Siying Chen @2025</Typography>
+          <Typography sx={{paddingBottom:2}} fontSize='small' color="textDisabled"><a href="https://siyingchenclaire.github.io/siying.github.io/">Siying Chen</a> @2025</Typography>
         </Box>
       </Drawer>
 
