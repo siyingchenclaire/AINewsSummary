@@ -1,7 +1,138 @@
+import { useState } from "react";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
+import Alert from '@mui/material/Alert';
+
+const CardItem = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: (theme.vars ?? theme).palette.text.secondary,
+}));
+
+const news = [
+  {
+    "title": "Amazon's Echo Show 10 Signals Ambient AI Strategy Shift",
+    "source": 1,
+    "time": "2 hours ago",
+    "impact": 1,
+    "summary": "Amazon's latest Echo devices emphasize ambient intelligence over voice commands, potentially reshaping the smart home market and challenging Google's Nest ecosystem.",
+    "tags": ["Smart Home", "Amazon", "AI Strategy"],
+    "strategicImpact": "Market positioning shift",
+    "bookmarked": false
+  },
+  {
+    "title": "OpenAI Content Licensing Expands Media Partnerships",
+    "source": 2,
+    "time": "4 hours ago",
+    "impact": 2,
+    "summary": "New licensing agreements with major media companies suggest OpenAI is building a sustainable content acquisition strategy, potentially reducing training data risks.",
+    "tags": ["OpenAI", "Content Licensing", "Media"],
+    "strategicImpact": "Risk mitigation",
+    "bookmarked": true
+  },
+  {
+    "title": "Samsung Q1 2024: AI Chip Demand Drives Record Profits",
+    "source": 3,
+    "time": "6 hours ago",
+    "impact": 1,
+    "summary": "Samsung's semiconductor division reports 40% profit increase driven by AI chip demand, indicating sustained growth in AI infrastructure spending.",
+    "tags": ["Samsung", "Semiconductors", "AI Infrastructure"],
+    "strategicImpact": "Market opportunity",
+    "bookmarked": false
+  },
+  {
+    "title": "Microsoft Copilot Enterprise Adoption Accelerates",
+    "source": "WSJ Tech",
+    "time": "8 hours ago",
+    "impact": 2,
+    "summary": "Enterprise customers are rapidly adopting Microsoft Copilot, with 65% of Fortune 500 companies now in pilot or full deployment phases.",
+    "tags": ["Microsoft", "Enterprise AI", "Productivity"],
+    "strategicImpact": "Competitive advantage",
+    "bookmarked": false
+  },
+  {
+    "title": "Tesla FSD Beta Expands to European Markets",
+    "source": "Automotive News",
+    "time": "1 day ago",
+    "impact": 3,
+    "summary": "Tesla's Full Self-Driving beta launches in select European cities, marking a significant regulatory milestone for autonomous vehicle deployment.",
+    "tags": ["Tesla", "Autonomous Vehicles", "Regulation"],
+    "strategicImpact": "Regulatory progress",
+    "bookmarked": false
+  },
+  {
+    "title": "Apple Vision Pro Sales Fall Short of Expectations",
+    "source": "MacRumors",
+    "time": "1 day ago",
+    "impact": 2,
+    "summary": "Apple Vision Pro sales figures suggest slower consumer adoption than anticipated, potentially impacting the broader XR market momentum.",
+    "tags": ["Apple", "XR/VR", "Consumer Hardware"],
+    "strategicImpact": "Market timing",
+    "bookmarked": true
+  }
+]
 
 function Card() {
+    const [impact, setImpact] = useState('0');
+    const [source, setSource] = useState('0');
+    const [time, setTime] = useState('0');
+    const [newsList, setNewsList] = useState(news);
+
+    const handleImpactChange = (event) => {
+        setImpact(event.target.value);
+        if(event.target.value !== '0') setNewsList(news.filter(item => 
+            item["impact"].toString() === event.target.value &&
+            (source === '0' || item["source"] === source)
+        ))
+        else setNewsList(news.filter(item => 
+            (source === '0' || item["source"] === source)
+        ));
+    };
+
+    const handleSourceChange = (event) => {
+        setSource(event.target.value);
+        if(event.target.value !== '0') setNewsList(news.filter(item => {
+            console.log(item["source"], event.target.value, item["source"].toString() === event.target.value, impact)
+            return item["source"].toString() === event.target.value &&
+            (impact === '0' || item["impact"] === impact)
+        }))
+        else setNewsList(news.filter(item => 
+            (impact === '0' || item["impact"] === impact)
+        ));
+    };
+
+    const handleTimeChange = (event) => {
+        setTime(event.target.value);
+    };
+
+    const filters = {
+        "Impact":{
+            options: ["All Impact Levels", "Critical", "Moderate", "Low"],
+            value: impact,
+            onChange: handleImpactChange
+        },
+        "Source":{
+            options: ["All Sources", "TechCrunch", "The Verge", "Bloomberg"],
+            value: source,
+            onChange: handleSourceChange
+        },
+        "Time":{
+            options: ["Today", "This Week", "This Month"],
+            value: time,
+            onChange:handleTimeChange
+
+        }
+    }
+
     return (
       <>
         <Box sx={{
@@ -16,160 +147,78 @@ function Card() {
             </Box>
         </Box>
 
-        <div class="filters-bar">
-            <select class="filter-dropdown">
-                <option>All Impact Levels</option>
-                <option>Critical</option>
-                <option>Moderate</option>
-                <option>Low</option>
-            </select>
-            <select class="filter-dropdown">
-                <option>All Sources</option>
-                <option>TechCrunch</option>
-                <option>The Verge</option>
-                <option>Bloomberg</option>
-            </select>
-            <select class="filter-dropdown">
-                <option>Today</option>
-                <option>This Week</option>
-                <option>This Month</option>
-            </select>
-            <div class="results-count">24 cards found</div>
-        </div>
+        <Box sx={{display:"flex", justifyContent:"space-between", width:"100%", mb:"20px", alignItems: 'center'}}>
+            <Box sx={{display:"flex", justifyContent:"flex-start"}}>
+                {Object.keys(filters).map((filter) =>(
+                    <FormControl sx={{mr:"20px"}}>
+                    <InputLabel>{filter}</InputLabel>
+                    <NativeSelect
+                        value={filters[filter]['value']}
+                        label={filter}
+                        onChange={filters[filter]['onChange']}
+                        defaultValue={0}
+                        variant="filled"
+                    >
+                        {filters[filter]['options'].map((key, index) => <option value={index}>{key}</option>)}
+                    </NativeSelect>
+                </FormControl>))}
+            </Box>
+            <Typography variant="subtitle1" gutterBottom color="textSecondary" >24 cards found</Typography>
+        </Box>
 
-        <div class="cards-grid">
-            <div class="intelligence-card">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">Amazon's Echo Show 10 Signals Ambient AI Strategy Shift</h3>
-                        <div class="card-source">TechCrunch • 2 hours ago</div>
-                    </div>
-                    <div class="impact-badge impact-critical">Critical</div>
-                </div>
-                <div class="card-body">
-                    <p class="card-summary">Amazon's latest Echo devices emphasize ambient intelligence over voice commands, potentially reshaping the smart home market and challenging Google's Nest ecosystem.</p>
-                    <div class="card-tags">
-                        <span class="tag">Smart Home</span>
-                        <span class="tag">Amazon</span>
-                        <span class="tag">AI Strategy</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span>Strategic Impact: Market positioning shift</span>
-                    <button class="bookmark-btn">🔖</button>
-                </div>
-            </div>
-
-            <div class="intelligence-card">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">OpenAI Content Licensing Expands Media Partnerships</h3>
-                        <div class="card-source">The Verge • 4 hours ago</div>
-                    </div>
-                    <div class="impact-badge impact-moderate">Moderate</div>
-                </div>
-                <div class="card-body">
-                    <p class="card-summary">New licensing agreements with major media companies suggest OpenAI is building a sustainable content acquisition strategy, potentially reducing training data risks.</p>
-                    <div class="card-tags">
-                        <span class="tag">OpenAI</span>
-                        <span class="tag">Content Licensing</span>
-                        <span class="tag">Media</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span>Strategic Impact: Risk mitigation</span>
-                    <button class="bookmark-btn bookmarked">🔖</button>
-                </div>
-            </div>
-
-            <div class="intelligence-card">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">Samsung Q1 2024: AI Chip Demand Drives Record Profits</h3>
-                        <div class="card-source">Bloomberg • 6 hours ago</div>
-                    </div>
-                    <div class="impact-badge impact-critical">Critical</div>
-                </div>
-                <div class="card-body">
-                    <p class="card-summary">Samsung's semiconductor division reports 40% profit increase driven by AI chip demand, indicating sustained growth in AI infrastructure spending.</p>
-                    <div class="card-tags">
-                        <span class="tag">Samsung</span>
-                        <span class="tag">Semiconductors</span>
-                        <span class="tag">AI Infrastructure</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span>Strategic Impact: Market opportunity</span>
-                    <button class="bookmark-btn">🔖</button>
-                </div>
-            </div>
-
-            <div class="intelligence-card">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">Microsoft Copilot Enterprise Adoption Accelerates</h3>
-                        <div class="card-source">WSJ Tech • 8 hours ago</div>
-                    </div>
-                    <div class="impact-badge impact-moderate">Moderate</div>
-                </div>
-                <div class="card-body">
-                    <p class="card-summary">Enterprise customers are rapidly adopting Microsoft Copilot, with 65% of Fortune 500 companies now in pilot or full deployment phases.</p>
-                    <div class="card-tags">
-                        <span class="tag">Microsoft</span>
-                        <span class="tag">Enterprise AI</span>
-                        <span class="tag">Productivity</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span>Strategic Impact: Competitive advantage</span>
-                    <button class="bookmark-btn">🔖</button>
-                </div>
-            </div>
-
-            <div class="intelligence-card">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">Tesla FSD Beta Expands to European Markets</h3>
-                        <div class="card-source">Automotive News • 1 day ago</div>
-                    </div>
-                    <div class="impact-badge impact-low">Low</div>
-                </div>
-                <div class="card-body">
-                    <p class="card-summary">Tesla's Full Self-Driving beta launches in select European cities, marking a significant regulatory milestone for autonomous vehicle deployment.</p>
-                    <div class="card-tags">
-                        <span class="tag">Tesla</span>
-                        <span class="tag">Autonomous Vehicles</span>
-                        <span class="tag">Regulation</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span>Strategic Impact: Regulatory progress</span>
-                    <button class="bookmark-btn">🔖</button>
-                </div>
-            </div>
-
-            <div class="intelligence-card">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">Apple Vision Pro Sales Fall Short of Expectations</h3>
-                        <div class="card-source">MacRumors • 1 day ago</div>
-                    </div>
-                    <div class="impact-badge impact-moderate">Moderate</div>
-                </div>
-                <div class="card-body">
-                    <p class="card-summary">Apple Vision Pro sales figures suggest slower consumer adoption than anticipated, potentially impacting the broader XR market momentum.</p>
-                    <div class="card-tags">
-                        <span class="tag">Apple</span>
-                        <span class="tag">XR/VR</span>
-                        <span class="tag">Consumer Hardware</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span>Strategic Impact: Market timing</span>
-                    <button class="bookmark-btn bookmarked">🔖</button>
-                </div>
-            </div>
-        </div>
+        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12}} sx={{}}>
+            {newsList.map(newsItem => (
+                <Grid size={4}>
+                    <CardItem sx={{p:0}} className="intelligence-card">
+                        <Box sx={{display:"flex", 
+                            flexDirection:"row", 
+                            justifyContent: 'space-between',
+                            alignItems: "flex-start",
+                            p:"20px"
+                            }}>
+                            <Box sx={{width: "80%"}}>
+                                <Typography variant="subtitle1" gutterBottom color="textPrimary" sx={{fontWeight: 500}}>
+                                    {newsItem['title']}
+                                </Typography>
+                                <Typography variant="caption" gutterBottom color="textDisabled" sx={{fontWeight: "bold"}}>
+                                    {newsItem['source']} · {newsItem['time']}
+                                </Typography>
+                            </Box>
+                            <Box sx={{textAlign:"center", width:"20%"}}>
+                                {newsItem["impact"] === 1?
+                                (<Typography variant="caption" gutterBottom color="error" sx={{bgcolor:" #fee2e2", p: "4px 8px", borderRadius: "12px"}}>
+                                    {filters["Impact"]["options"][newsItem["impact"]]}
+                                </Typography>):
+                                (newsItem["impact"] === 3? 
+                                (<Typography variant="caption" gutterBottom color="success" sx={{bgcolor:"#dcfce7", p: "4px 8px", borderRadius: "12px"}}>
+                                    {filters["Impact"]["options"][newsItem["impact"]]}
+                                </Typography>):
+                                (<Typography variant="caption" gutterBottom color="warning" sx={{bgcolor:" #fef3c7", p: "4px 8px", borderRadius: "12px"}}>
+                                    {filters["Impact"]["options"][newsItem["impact"]]}
+                                </Typography>))}
+                            </Box>
+                        </Box>
+                        <Divider />
+                        <Box sx={{textAlign:"left", p:"20px"}}>
+                            <Typography variant="body2" gutterBottom color="textPrimary" sx={{mt:"20px", lineHeight:"175%"}}>
+                                {newsItem['summary']}
+                            </Typography>
+                            {newsItem['tags'].map(tag => (
+                                <Typography variant="caption" gutterBottom color="textPrimary" sx={{bgcolor:" #f1f5f9", p: "4px 8px", borderRadius: "12px"}}>
+                                    {tag}
+                                </Typography>
+                            ))}
+                        </Box>
+                        <Box sx={{textAlign:"left", bgcolor:"#f8fafc", width:"100%", p:"20px"}}>
+                            <Typography variant="caption" gutterBottom color="textDisabled" sx={{fontWeight: "bold"}}>
+                                Source Impact: {newsItem["source"]}
+                            </Typography>
+                            <button class="bookmark-btn">🔖</button>
+                        </Box>
+                    </CardItem>
+                </Grid>
+            ))}
+        </Grid>
       </>
     );
 }
