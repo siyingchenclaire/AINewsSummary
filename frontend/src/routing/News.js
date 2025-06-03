@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 
-function Home() {
+function News() {
     return (
       <>
         <h2 className = "roboto">Home Page</h2>
@@ -9,5 +9,5 @@ function Home() {
       </>
     );
   }
-  export default Home;
+  export default News;
   

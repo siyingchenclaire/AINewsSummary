@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 const drawerWidth = 240;
 
-export default function PermanentDrawerLeft() {
+export default function Report() {
   return (
       <>
         <Toolbar />

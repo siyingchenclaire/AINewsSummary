@@ -1,0 +1,9 @@
+function Card() {
+    return (
+      <>
+        <h2 className ="text-gray-950">About Page</h2>
+      </>
+    );
+}
+export default Card;
+  

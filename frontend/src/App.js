@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './routing/Home';
-import About from './routing/About';
-import Test from './routing/Test';
+import News from './routing/News';
+import Subscription from './routing/Subscription';
+import Report from './routing/Report';
+import Card from './routing/Card';
 import './App.css';
 
 import * as React from 'react';
@@ -22,9 +23,9 @@ import Icon from '@mui/material/Icon';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
 
 const drawerWidth = 240;
 const routing = {
@@ -33,15 +34,15 @@ const routing = {
     'logo': 'feed.svg'
   },
   'Subscription':{
-    'routing': '/',
+    'routing': '/subscription',
     'logo': 'subscription.svg'
   },
   'Reports':{
-    'routing': '/',
+    'routing': '/report',
     'logo': 'report.svg'
   },
   'Intelligence Cards':{
-    'routing': '/',
+    'routing': '/card',
     'logo': 'intelligence.svg'
   }
 }
@@ -62,34 +63,37 @@ function App() {
           width: `100%`, 
           margin: '0',
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          backgroundColor:'#0d47a1',
+          backgroundColor:'#27303C',
         }}
       >
         <Toolbar sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Box sx={{display: 'flex', flexDirection: 'row'}}>
-            <Icon sx={{marginRight:'20px'}}>
-              <img src='pulse.svg' />
-            </Icon>
+          <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+            <DonutSmallOutlinedIcon sx={{marginRight:'10px'}} fontSize="large"/>
             <Typography variant="h6" noWrap component="div">
               Tech Pulse AI
             </Typography>
           </Box>
-          <Box sx={{display: 'flex', }}>
+          <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Paper
               component="form"
-              sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400}}
-              variant="outlined"
+              sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                width: '400px', 
+                marginRight:'10px',
+                border:0
+              }}
             >
+              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                <SearchIcon/>
+              </IconButton>
               <InputBase
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Search..."
                 inputProps={{ 'aria-label': 'search bar' }}
               />
-              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
             </Paper>
-            <AccountCircleIcon />
+            <AccountCircleIcon fontSize="large"/>
           </Box>
         </Toolbar>
       </AppBar>
@@ -101,7 +105,7 @@ function App() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box'
-          }
+          },
         }}
         variant="permanent"
         anchor="left"
@@ -129,8 +133,6 @@ function App() {
           ))}
         </List>
 
-        <Divider />
-
         <List
           subheader={<ListSubheader sx={{display: 'flex' }}>Topics</ListSubheader>}
         >
@@ -143,7 +145,7 @@ function App() {
               marginTop: "5px",
               marginBottom: "5px",
               borderRadius: '10px',
-              width: `calc(${drawerWidth}px - 30px)`
+              width: `calc(${drawerWidth}px - 30px)`,
             }} disablePadding>
               <ListItemButton>
                 <ListItemText primary={text} />
@@ -151,6 +153,15 @@ function App() {
             </ListItem>
           ))}
         </List>
+
+        <Box
+          component="footer"
+          style={{position:'fixed', bottom:0, left: 0, width:drawerWidth}}
+        >
+          <Divider sx={{width: '80%', marginLeft: '10%'}}/>
+          <Typography sx={{paddingTop:1}} color="textSecondary">PATENT Certificate</Typography>
+          <Typography sx={{paddingBottom:2}} fontSize='small' color="textDisabled">Siying Chen @2025</Typography>
+        </Box>
       </Drawer>
 
       <Box
@@ -164,9 +175,10 @@ function App() {
       >
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/test" element={<Test />} />
+            <Route path="/" element={<News />} />
+            <Route path="/card" element={<Card />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/subscription" element={<Subscription />} />
           </Routes>
         </Router>
       </Box>
