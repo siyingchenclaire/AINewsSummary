@@ -19,7 +19,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Icon from '@mui/material/Icon';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
@@ -55,7 +54,7 @@ const topics = {
 
 function App() {
   return (
-    <Box className="App" sx={{ display: 'flex' }}>
+    <Box className="App" sx={{ display: 'flex'}}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -73,13 +72,13 @@ function App() {
               Tech Pulse AI
             </Typography>
           </Box>
-          <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '40%'}}>
             <Paper
               component="form"
               sx={{ 
                 display: 'flex', 
                 alignItems: 'center', 
-                width: '400px', 
+                width: '100%', 
                 marginRight:'10px',
                 border:0
               }}
@@ -105,7 +104,7 @@ function App() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box'
-          },
+          }
         }}
         variant="permanent"
         anchor="left"
@@ -166,11 +165,12 @@ function App() {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, 
-          bgcolor: 'background.default', 
+        sx={{ flexGrow: 1,  
           p: 3,  
           width: `calc(100% - ${drawerWidth}px)`, 
-          ml: `${drawerWidth}px`
+          ml: `${drawerWidth}px`,
+          bgcolor: '#FBFBFC',
+          mt:'60px'
         }}
       >
         <Router>
