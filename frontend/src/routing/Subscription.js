@@ -1,15 +1,25 @@
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+
 function Subscription() {
+    const sample = {display:'none'}
     return (
       <>
-        <div class="page-header">
-            <div>
-                <h1 class="page-title">Subscriptions & Alerts</h1>
-                <p class="page-subtitle">Customize your intelligence feed with targeted tracking</p>
-            </div>
-            <button class="add-btn" onclick="openModal()">
+        <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginBottom: '32px'
+        }}>
+            <Box sx={{textAlign: 'left' }}>
+                <Typography variant="h5" gutterBottom sx={{fontWeight: 500}}>Subscriptions & Alerts</Typography>
+                <Typography variant="subtitle1" gutterBottom color="textSecondary">Customize your intelligence feed with targeted tracking</Typography>
+            </Box>
+            <Button variant="contained" onclick="openModal()" size="large">
                 + Add Subscription
-            </button>
-        </div>
+            </Button>
+        </Box>
 
         <div class="subscriptions-grid">
             <div class="subscription-card">
@@ -260,6 +270,42 @@ function Subscription() {
                         <div class="alert-description">Zero-day exploit discovered in major cloud platform</div>
                     </div>
                     <div class="alert-time">2 days ago</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal" style={sample}>
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add New Subscription</h3>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Subscription Name</label>
+                        <input type="text" class="form-input" placeholder="e.g., Tesla Autonomous Vehicle Updates"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <select class="form-input">
+                            <option>Company Watch</option>
+                            <option>Technology Watch</option>
+                            <option>Sector Watch</option>
+                            <option>Trend Watch</option>
+                            <option>Security Watch</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Keywords (comma-separated)</label>
+                        <input type="text" class="form-input" placeholder="e.g., Tesla, autonomous, self-driving, FSD"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" placeholder="Describe what this subscription should track..."></textarea>
+                    </div>
+                </form>
+                <div class="modal-actions">
+                    <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button class="btn-primary">Create Subscription</button>
                 </div>
             </div>
         </div>

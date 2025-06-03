@@ -161,13 +161,6 @@ a {
     padding: 24px;
 }
 
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
-}
-
 .page-title {
     font-size: 24px;
     font-weight: 600;
@@ -372,48 +365,6 @@ a {
     color: #64748b;
 }
 
-.quick-insights {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.insight-card {
-    background: white;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    padding: 16px;
-    text-align: center;
-}
-
-.insight-value {
-    font-size: 24px;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 4px;
-}
-
-.insight-label {
-    font-size: 12px;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.insight-change {
-    font-size: 11px;
-    margin-top: 4px;
-}
-
-.change-positive {
-    color: #16a34a;
-}
-
-.change-negative {
-    color: #dc2626;
-}
-
 .report-actions {
     display: flex;
     gap: 8px;
@@ -547,13 +498,6 @@ a {
 .content {
     flex: 1;
     padding: 24px;
-}
-
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
 }
 
 .page-title {
@@ -996,10 +940,6 @@ a {
 .content {
     flex: 1;
     padding: 24px;
-}
-
-.page-header {
-    margin-bottom: 24px;
 }
 
 .page-title {

@@ -1,10 +1,20 @@
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
 function Card() {
     return (
       <>
-        <div class="page-header">
-            <h1 class="page-title">Intelligence Cards</h1>
-            <p class="page-subtitle">AI-generated strategic insights from today's tech news</p>
-        </div>
+        <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginBottom: '32px'
+        }}>
+            <Box sx={{textAlign: 'left'}}>
+                <Typography variant="h5" gutterBottom sx={{fontWeight: 500}}>Intelligence Cards</Typography>
+                <Typography variant="subtitle1" gutterBottom color="textSecondary">AI-generated strategic insights from today's tech news</Typography>
+            </Box>
+        </Box>
 
         <div class="filters-bar">
             <select class="filter-dropdown">
