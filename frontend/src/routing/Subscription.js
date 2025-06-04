@@ -1,16 +1,131 @@
+import { useState } from "react";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import CardItem from "../utils/CardItem";
+import IconButton from '@mui/material/IconButton';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
+import ReportProblemTwoToneIcon from '@mui/icons-material/ReportProblemTwoTone';
+import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
+import NotificationsActiveTwoToneIcon from '@mui/icons-material/NotificationsActiveTwoTone';
+
+const subscriptions = [
+    {
+      "title": "OpenAI & Competitors",
+      "type": "Company Watch",
+      "description": "Track all news, funding, product launches, and strategic moves from OpenAI, Anthropic, Google DeepMind, and other AI leaders.",
+      "stats": {
+        "articles": 127,
+        "alerts": 18,
+        "relevance": "85%"
+      },
+      "keywords": ["OpenAI", "Anthropic", "GPT", "Claude", "LLM"],
+      "status": "Active"
+    },
+    {
+      "title": "AI Chip Market",
+      "type": "Sector Watch",
+      "description": "Monitor semiconductor developments, AI chip innovations, supply chain updates from NVIDIA, AMD, Intel, and emerging players.",
+      "stats": {
+        "articles": 89,
+        "alerts": 12,
+        "relevance": "92%"
+      },
+      "keywords": ["NVIDIA", "AMD", "GPU", "AI Chips", "Semiconductors"],
+      "status": "Active"
+    },
+    {
+      "title": "Apple Innovations",
+      "type": "Company Watch",
+      "description": "Stay updated on Apple's product roadmap, AI integrations, Vision Pro developments, and strategic partnerships.",
+      "stats": {
+        "articles": 56,
+        "alerts": 8,
+        "relevance": "78%"
+      },
+      "keywords": ["Apple", "Vision Pro", "iOS", "AR/VR", "Apple Intelligence"],
+      "status": "Paused"
+    },
+    {
+      "title": "Enterprise AI Adoption",
+      "type": "Trend Watch",
+      "description": "Track enterprise AI implementation trends, case studies, ROI reports, and adoption challenges across industries.",
+      "stats": {
+        "articles": 203,
+        "alerts": 31,
+        "relevance": "81%"
+      },
+      "keywords": ["Enterprise AI", "Digital Transformation", "ROI", "Implementation"],
+      "status": "Active"
+    },
+    {
+      "title": "Quantum Computing",
+      "type": "Technology Watch",
+      "description": "Monitor quantum computing breakthroughs, commercial applications, and competitive developments from IBM, Google, and startups.",
+      "stats": {
+        "articles": 34,
+        "alerts": 5,
+        "relevance": "73%"
+      },
+      "keywords": ["Quantum Computing", "IBM", "Google Quantum", "Qubits"],
+      "status": "Active"
+    },
+    {
+      "title": "Cybersecurity Threats",
+      "type": "Security Watch",
+      "description": "Critical security alerts, breach reports, vulnerability disclosures, and defense technology developments.",
+      "stats": {
+        "articles": 156,
+        "alerts": 24,
+        "relevance": "88%"
+      },
+      "keywords": ["Cybersecurity", "Data Breaches", "Vulnerabilities", "Zero-day"],
+      "status": "Active"
+    }
+  ]
+const alerts = [
+    {
+      "level": "high",
+      "title": "Major AI Partnership Announced",
+      "description": "Microsoft and OpenAI expand partnership with $10B investment commitment",
+      "time": "2 hours ago"
+    },
+    {
+      "level": "medium",
+      "title": "Samsung Q1 Earnings Beat",
+      "description": "Semiconductor division reports 40% profit increase driven by AI chip demand",
+      "time": "6 hours ago"
+    },
+    {
+      "level": "low",
+      "title": "New Quantum Breakthrough",
+      "description": "IBM announces 1000-qubit quantum processor milestone",
+      "time": "1 day ago"
+    },
+    {
+      "level": "high",
+      "title": "Critical Security Vulnerability",
+      "description": "Zero-day exploit discovered in major cloud platform",
+      "time": "2 days ago"
+    }
+  ]
 
 function Subscription() {
-    const sample = {display:'none'}
+    const [checked, setChecked] = useState(true);
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
     return (
       <>
         <Box sx={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            marginBottom: '32px'
+            mb: '32px'
         }}>
             <Box sx={{textAlign: 'left' }}>
                 <Typography variant="h5" gutterBottom sx={{fontWeight: 500}}>Subscriptions & Alerts</Typography>
@@ -21,294 +136,92 @@ function Subscription() {
             </Button>
         </Box>
 
-        <div class="subscriptions-grid">
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div>
-                        <h3 class="subscription-title">OpenAI & Competitors</h3>
-                        <div class="subscription-type">Company Watch</div>
-                    </div>
-                    <div class="subscription-menu">⋯</div>
-                </div>
-                <p class="subscription-description">Track all news, funding, product launches, and strategic moves from OpenAI, Anthropic, Google DeepMind, and other AI leaders.</p>
-                <div class="subscription-stats">
-                    <div class="stat">
-                        <div class="stat-value">127</div>
-                        <div class="stat-label">Articles</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">18</div>
-                        <div class="stat-label">Alerts</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">85%</div>
-                        <div class="stat-label">Relevance</div>
-                    </div>
-                </div>
-                <div class="subscription-keywords">
-                    <span class="keyword-tag">OpenAI</span>
-                    <span class="keyword-tag">Anthropic</span>
-                    <span class="keyword-tag">GPT</span>
-                    <span class="keyword-tag">Claude</span>
-                    <span class="keyword-tag">LLM</span>
-                </div>
-                <div class="subscription-controls">
-                    <div class="toggle-switch active"></div>
-                    <span style={{fontSize:'12px', color:'#64748b'}}>Active</span>
-                </div>
-            </div>
+         <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12}} sx={{}}>
+            {subscriptions.map(subscription => (
+                <Grid size={4}>
+                    <CardItem sx={{p:0}} className="intelligence-card">
+                        <Box sx={{display:"flex", 
+                            flexDirection:"row", 
+                            justifyContent: 'space-between',
+                            alignItems: "flex-start",
+                            p:"20px"
+                            }}>
+                            <Box sx={{width: "80%"}}>
+                                <Typography variant="subtitle1" gutterBottom color="textPrimary" sx={{fontWeight: 500}}>
+                                    {subscription['title']}
+                                </Typography>
+                                <Typography variant="caption" gutterBottom color="textDisabled" sx={{fontWeight: "bold", bgcolor:" #f1f5f9", p:"2px 40px", borderRadius: "12px"}}>
+                                    {subscription['type']}
+                                </Typography>
+                            </Box>
+                            <Box sx={{width:"20%"}}>
+                                <IconButton aria-label="delete" size="large">
+                                    <MoreHorizIcon />
+                                </IconButton>
+                            </Box>
+                        </Box>
+                        <Box sx={{textAlign:"left", pl:"20px", pr:"20px"}}>
+                            <Typography variant="body2" gutterBottom color="textPrimary" sx={{lineHeight:"175%", mb:"20px"}}>
+                                {subscription['description']}
+                            </Typography>
+                            <Box sx={{display:"flex", flexDirection:"row", mb:"20px"}}>
+                                {Object.keys(subscription['stats']).map(key => (
+                                    <Box sx={{display:"flex",flexDirection:"column", alignItems:'center', mr:'20px'}}>
+                                        <Typography variant="h5" gutterBottom color="textPrimary" sx={{fontWeight: 500}}>
+                                            {subscription['stats'][key].toString()}
+                                        </Typography>
+                                        <Typography variant="caption" gutterBottom color="textSecondary" sx={{textTransform: 'uppercase'}}>
+                                            {key}
+                                        </Typography>
+                                    </Box>
+                                ))}
+                            </Box>
+                            <Box sx={{display: "flex", flexWrap: "wrap"}}>
+                                {subscription['keywords'].map(tag => (
+                                    <Typography variant="caption" gutterBottom color="info" sx={{bgcolor:" #eef2ff", p: "4px 8px", borderRadius: "12px", mr:"5px", }}>
+                                        {tag}
+                                    </Typography>
+                                ))}
+                            </Box>
+                        </Box>
+                        <Box sx={{display: "flex", flexDirection:"row", justifyContent:"space-between", width:"100%", p:"20px"}}>
+                            <Switch checked={checked} onChange={handleChange} defaultChecked size="small"/>
+                            <Typography variant="body2" gutterBottom color="textSecondary" sx={{lineHeight:"175%"}}>
+                            {checked?<>Active</>:<>Paused</>}
+                            </Typography>
+                        </Box>
+                    </CardItem>
+                </Grid>
+            ))}
+        </Grid>
 
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div>
-                        <h3 class="subscription-title">AI Chip Market</h3>
-                        <div class="subscription-type">Sector Watch</div>
-                    </div>
-                    <div class="subscription-menu">⋯</div>
-                </div>
-                <p class="subscription-description">Monitor semiconductor developments, AI chip innovations, supply chain updates from NVIDIA, AMD, Intel, and emerging players.</p>
-                <div class="subscription-stats">
-                    <div class="stat">
-                        <div class="stat-value">89</div>
-                        <div class="stat-label">Articles</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">Alerts</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">92%</div>
-                        <div class="stat-label">Relevance</div>
-                    </div>
-                </div>
-                <div class="subscription-keywords">
-                    <span class="keyword-tag">NVIDIA</span>
-                    <span class="keyword-tag">AMD</span>
-                    <span class="keyword-tag">GPU</span>
-                    <span class="keyword-tag">AI Chips</span>
-                    <span class="keyword-tag">Semiconductors</span>
-                </div>
-                <div class="subscription-controls">
-                    <div class="toggle-switch active"></div>
-                    <span style={{fontSize:'12px', color:'#64748b'}}>Active</span>
-                </div>
-            </div>
-
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div>
-                        <h3 class="subscription-title">Apple Innovations</h3>
-                        <div class="subscription-type">Company Watch</div>
-                    </div>
-                    <div class="subscription-menu">⋯</div>
-                </div>
-                <p class="subscription-description">Stay updated on Apple's product roadmap, AI integrations, Vision Pro developments, and strategic partnerships.</p>
-                <div class="subscription-stats">
-                    <div class="stat">
-                        <div class="stat-value">56</div>
-                        <div class="stat-label">Articles</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">8</div>
-                        <div class="stat-label">Alerts</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">78%</div>
-                        <div class="stat-label">Relevance</div>
-                    </div>
-                </div>
-                <div class="subscription-keywords">
-                    <span class="keyword-tag">Apple</span>
-                    <span class="keyword-tag">Vision Pro</span>
-                    <span class="keyword-tag">iOS</span>
-                    <span class="keyword-tag">AR/VR</span>
-                    <span class="keyword-tag">Apple Intelligence</span>
-                </div>
-                <div class="subscription-controls">
-                    <div class="toggle-switch"></div>
-                    <span style={{fontSize:'12px', color:'#94a3b8'}}>Paused</span>
-                </div>
-            </div>
-
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div>
-                        <h3 class="subscription-title">Enterprise AI Adoption</h3>
-                        <div class="subscription-type">Trend Watch</div>
-                    </div>
-                    <div class="subscription-menu">⋯</div>
-                </div>
-                <p class="subscription-description">Track enterprise AI implementation trends, case studies, ROI reports, and adoption challenges across industries.</p>
-                <div class="subscription-stats">
-                    <div class="stat">
-                        <div class="stat-value">203</div>
-                        <div class="stat-label">Articles</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">31</div>
-                        <div class="stat-label">Alerts</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">81%</div>
-                        <div class="stat-label">Relevance</div>
-                    </div>
-                </div>
-                <div class="subscription-keywords">
-                    <span class="keyword-tag">Enterprise AI</span>
-                    <span class="keyword-tag">Digital Transformation</span>
-                    <span class="keyword-tag">ROI</span>
-                    <span class="keyword-tag">Implementation</span>
-                </div>
-                <div class="subscription-controls">
-                    <div class="toggle-switch active"></div>
-                    <span style={{fontSize:'12px', color:'#64748b'}}>Active</span>
-                </div>
-            </div>
-
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div>
-                        <h3 class="subscription-title">Quantum Computing</h3>
-                        <div class="subscription-type">Technology Watch</div>
-                    </div>
-                    <div class="subscription-menu">⋯</div>
-                </div>
-                <p class="subscription-description">Monitor quantum computing breakthroughs, commercial applications, and competitive developments from IBM, Google, and startups.</p>
-                <div class="subscription-stats">
-                    <div class="stat">
-                        <div class="stat-value">34</div>
-                        <div class="stat-label">Articles</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">5</div>
-                        <div class="stat-label">Alerts</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">73%</div>
-                        <div class="stat-label">Relevance</div>
-                    </div>
-                </div>
-                <div class="subscription-keywords">
-                    <span class="keyword-tag">Quantum Computing</span>
-                    <span class="keyword-tag">IBM</span>
-                    <span class="keyword-tag">Google Quantum</span>
-                    <span class="keyword-tag">Qubits</span>
-                </div>
-                <div class="subscription-controls">
-                    <div class="toggle-switch active"></div>
-                    <span style={{fontSize:'12px', color:'#64748b'}}>Active</span>
-                </div>
-            </div>
-
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div>
-                        <h3 class="subscription-title">Cybersecurity Threats</h3>
-                        <div class="subscription-type">Security Watch</div>
-                    </div>
-                    <div class="subscription-menu">⋯</div>
-                </div>
-                <p class="subscription-description">Critical security alerts, breach reports, vulnerability disclosures, and defense technology developments.</p>
-                <div class="subscription-stats">
-                    <div class="stat">
-                        <div class="stat-value">156</div>
-                        <div class="stat-label">Articles</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">24</div>
-                        <div class="stat-label">Alerts</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">88%</div>
-                        <div class="stat-label">Relevance</div>
-                    </div>
-                </div>
-                <div class="subscription-keywords">
-                    <span class="keyword-tag">Cybersecurity</span>
-                    <span class="keyword-tag">Data Breaches</span>
-                    <span class="keyword-tag">Vulnerabilities</span>
-                    <span class="keyword-tag">Zero-day</span>
-                </div>
-                <div class="subscription-controls">
-                    <div class="toggle-switch active"></div>
-                    <span style={{fontSize:'12px', color:'#64748b'}}>Active</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="alerts-section">
-            <h2 class="section-title">Recent Alerts</h2>
-            <div class="alerts-list">
-                <div class="alert-item">
-                    <div class="alert-icon alert-high">🚨</div>
-                    <div class="alert-content">
-                        <div class="alert-title">Major AI Partnership Announced</div>
-                        <div class="alert-description">Microsoft and OpenAI expand partnership with $10B investment commitment</div>
-                    </div>
-                    <div class="alert-time">2 hours ago</div>
-                </div>
-                <div class="alert-item">
-                    <div class="alert-icon alert-medium">⚠️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">Samsung Q1 Earnings Beat</div>
-                        <div class="alert-description">Semiconductor division reports 40% profit increase driven by AI chip demand</div>
-                    </div>
-                    <div class="alert-time">6 hours ago</div>
-                </div>
-                <div class="alert-item">
-                    <div class="alert-icon alert-info">💡</div>
-                    <div class="alert-content">
-                        <div class="alert-title">New Quantum Breakthrough</div>
-                        <div class="alert-description">IBM announces 1000-qubit quantum processor milestone</div>
-                    </div>
-                    <div class="alert-time">1 day ago</div>
-                </div>
-                <div class="alert-item">
-                    <div class="alert-icon alert-high">🚨</div>
-                    <div class="alert-content">
-                        <div class="alert-title">Critical Security Vulnerability</div>
-                        <div class="alert-description">Zero-day exploit discovered in major cloud platform</div>
-                    </div>
-                    <div class="alert-time">2 days ago</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-overlay" id="modal" style={sample}>
-            <div class="modal">
-                <div class="modal-header">
-                    <h3 class="modal-title">Add New Subscription</h3>
-                </div>
-                <form>
-                    <div class="form-group">
-                        <label class="form-label">Subscription Name</label>
-                        <input type="text" class="form-input" placeholder="e.g., Tesla Autonomous Vehicle Updates"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Type</label>
-                        <select class="form-input">
-                            <option>Company Watch</option>
-                            <option>Technology Watch</option>
-                            <option>Sector Watch</option>
-                            <option>Trend Watch</option>
-                            <option>Security Watch</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Keywords (comma-separated)</label>
-                        <input type="text" class="form-input" placeholder="e.g., Tesla, autonomous, self-driving, FSD"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-textarea" placeholder="Describe what this subscription should track..."></textarea>
-                    </div>
-                </form>
-                <div class="modal-actions">
-                    <button class="btn-secondary" onclick="closeModal()">Cancel</button>
-                    <button class="btn-primary">Create Subscription</button>
-                </div>
-            </div>
-        </div>
+        <Box sx={{textAlign: 'center', mt:"40px"}}>
+            <Typography variant="h6" gutterBottom sx={{fontWeight: 500, mb:'16px'}}>Recent Alerts</Typography>
+            <Stack sx={{ width: '100%' }}>
+            {
+                alerts.map(alert => (
+                    <CardItem sx={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
+                        {
+                            alert['level'] === 'high'?(<ReportProblemTwoToneIcon color="error" />):(
+                                alert['level'] === 'medium'?(<NotificationsActiveTwoToneIcon color="warning" />):(<InfoTwoToneIcon color="success" />)
+                            )
+                        }
+                        <Box sx={{display:"flex", flexDirection:"column", width:"80%"}}>
+                            <Typography variant="subtitle2" gutterBottom color="textPrimary" sx={{fontWeight: 500}}>
+                                {alert['title']}
+                            </Typography>
+                            <Typography variant="body3" gutterBottom color="textSecondary" sx={{}}>
+                                {alert['description']}
+                            </Typography>
+                        </Box>
+                        <Typography variant="body3" gutterBottom color="textSecondary" sx={{}}>
+                            {alert['time']}
+                        </Typography>
+                    </CardItem>
+                ))
+            }
+            </Stack>
+        </Box>
       </>
     );
 }

@@ -4,16 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import BoltIcon from '@mui/icons-material/Bolt';
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
-}));
+import CardItem from '../utils/CardItem'
 
 const stats=[{
     "insight-value":127,
@@ -62,14 +53,14 @@ export default function Report() {
         <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 16 }} sx={{marginBottom: '24px'}}>
             {stats.map(stat => (
                 <Grid size={4}>
-                    <Item sx={{}}>
+                    <CardItem sx={{}}>
                         <Typography variant="h5" gutterBottom color="textPrimary" sx={{fontWeight: 500}}>{stat['insight-value']}</Typography>
                         <Typography variant="subtitle2" gutterBottom color="textSecondary">{stat['insight-label']}</Typography>
                         {stat['insight-change'] && stat['insight-change'] > 0?
                         (<Typography variant="subtitle2" gutterBottom color="success">+{format(stat['insight-change'])} from yesterday</Typography>):
                         (!stat['insight-change']?(<Typography variant="subtitle2" gutterBottom color="textSecondary"><br/></Typography>):
                         (<Typography variant="subtitle2" gutterBottom color="error">{format(stat['insight-change'])} from yesterday</Typography>))}
-                    </Item>
+                    </CardItem>
                 </Grid>
             ))}
         </Grid>

@@ -5,23 +5,13 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import Alert from '@mui/material/Alert';
-
-const CardItem = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
-}));
+import CardItem from "../utils/CardItem";
 
 const news = [
   {
     "title": "Amazon's Echo Show 10 Signals Ambient AI Strategy Shift",
-    "source": 1,
+    "source": "TechCrunch",
     "time": "2 hours ago",
     "impact": 1,
     "summary": "Amazon's latest Echo devices emphasize ambient intelligence over voice commands, potentially reshaping the smart home market and challenging Google's Nest ecosystem.",
@@ -31,7 +21,7 @@ const news = [
   },
   {
     "title": "OpenAI Content Licensing Expands Media Partnerships",
-    "source": 2,
+    "source": "The Verge",
     "time": "4 hours ago",
     "impact": 2,
     "summary": "New licensing agreements with major media companies suggest OpenAI is building a sustainable content acquisition strategy, potentially reducing training data risks.",
@@ -41,7 +31,7 @@ const news = [
   },
   {
     "title": "Samsung Q1 2024: AI Chip Demand Drives Record Profits",
-    "source": 3,
+    "source": "Bloomberg",
     "time": "6 hours ago",
     "impact": 1,
     "summary": "Samsung's semiconductor division reports 40% profit increase driven by AI chip demand, indicating sustained growth in AI infrastructure spending.",
@@ -199,15 +189,17 @@ function Card() {
                             </Box>
                         </Box>
                         <Divider />
-                        <Box sx={{textAlign:"left", p:"20px"}}>
-                            <Typography variant="body2" gutterBottom color="textPrimary" sx={{mt:"20px", lineHeight:"175%"}}>
+                        <Box sx={{textAlign:"left", p:"20px", mb:"10px",}}>
+                            <Typography variant="body2" gutterBottom color="textPrimary" sx={{lineHeight:"175%", mb:"10px"}}>
                                 {newsItem['summary']}
                             </Typography>
-                            {newsItem['tags'].map(tag => (
-                                <Typography variant="caption" gutterBottom color="textPrimary" sx={{bgcolor:" #f1f5f9", p: "4px 8px", borderRadius: "12px"}}>
-                                    {tag}
-                                </Typography>
-                            ))}
+                            <Box sx={{display: "flex", flexWrap: "wrap"}}>
+                                {newsItem['tags'].map(tag => (
+                                    <Typography variant="caption" gutterBottom color="textPrimary" sx={{bgcolor:" #f1f5f9", p: "4px 8px", borderRadius: "12px", mr:"5px"}}>
+                                        {tag}
+                                    </Typography>
+                                ))}
+                            </Box>
                         </Box>
                         <Box sx={{textAlign:"left", bgcolor:"#f8fafc", width:"100%", p:"20px"}}>
                             <Typography variant="caption" gutterBottom color="textDisabled" sx={{fontWeight: "bold"}}>

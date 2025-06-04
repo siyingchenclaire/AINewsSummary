@@ -600,28 +600,6 @@ a {
     letter-spacing: 0.5px;
 }
 
-.subscription-keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 16px;
-}
-
-.keyword-tag {
-    background: #eef2ff;
-    color: #667eea;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.subscription-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .toggle-switch {
     position: relative;
     width: 44px;
