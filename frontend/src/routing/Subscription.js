@@ -84,6 +84,18 @@ const subscriptions = [
       },
       "keywords": ["Cybersecurity", "Data Breaches", "Vulnerabilities", "Zero-day"],
       "status": "Active"
+    },
+    {
+      "title": "dfs",
+      "type": "Company Watch",
+      "description": "dskjd",
+      "stats": {
+        "articles": 156,
+        "alerts": 24,
+        "relevance": "88%"
+      },
+      "keywords": ["Cybersecurity", "Data Breaches", "Vulnerabilities", "Zero-day"],
+      "status": "Active"
     }
   ]
 const alerts = [
@@ -194,34 +206,6 @@ function Subscription() {
                 </Grid>
             ))}
         </Grid>
-
-        <Box sx={{textAlign: 'center', mt:"40px"}}>
-            <Typography variant="h6" gutterBottom sx={{fontWeight: 500, mb:'16px'}}>Recent Alerts</Typography>
-            <Stack sx={{ width: '100%' }}>
-            {
-                alerts.map(alert => (
-                    <CardItem sx={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
-                        {
-                            alert['level'] === 'high'?(<ReportProblemTwoToneIcon color="error" />):(
-                                alert['level'] === 'medium'?(<NotificationsActiveTwoToneIcon color="warning" />):(<InfoTwoToneIcon color="success" />)
-                            )
-                        }
-                        <Box sx={{display:"flex", flexDirection:"column", width:"80%"}}>
-                            <Typography variant="subtitle2" gutterBottom color="textPrimary" sx={{fontWeight: 500}}>
-                                {alert['title']}
-                            </Typography>
-                            <Typography variant="body3" gutterBottom color="textSecondary" sx={{}}>
-                                {alert['description']}
-                            </Typography>
-                        </Box>
-                        <Typography variant="body3" gutterBottom color="textSecondary" sx={{}}>
-                            {alert['time']}
-                        </Typography>
-                    </CardItem>
-                ))
-            }
-            </Stack>
-        </Box>
       </>
     );
 }

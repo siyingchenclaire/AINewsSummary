@@ -133,27 +133,6 @@ function App() {
           ))}
         </List>
 
-        <List
-          subheader={<ListSubheader sx={{display: 'flex' }}>Topics</ListSubheader>}
-        >
-          {Object.keys(topics).map((text, index) => (
-            <ListItem key={text} sx={{
-              border:1, 
-              borderColor: 'grey.300', 
-              marginLeft: "15px", 
-              marginRight: "15px",
-              marginTop: "5px",
-              marginBottom: "5px",
-              borderRadius: '10px',
-              width: `calc(${drawerWidth}px - 30px)`,
-            }} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-
         <Box
           component="footer"
           style={{position:'fixed', bottom:0, left: 0, width:drawerWidth}}

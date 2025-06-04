@@ -36,6 +36,12 @@ export default function News(){
         {'title': 'Elon Musk Criticizes Trump’s Tax Bill; Immigration Crackdown Intensifies', 'description': 'Elon Musk called President Trump’s new tax and spending bill a “disgusting abomination.” Meanwhile, ICE detained the family of a Colorado suspect, and the administration rescinded emergency abortion care protections.', 'source': 'The Guardian'},
         {'title': 'OECD Cuts U.S. Growth Outlook Amid Market Gains', 'description': 'Despite the OECD lowering its U.S. growth forecast, the Nasdaq moved higher, led by gains in chip stocks.', 'source': 'The Wall Street Journal'}],
     },
+    {
+      'is_user': true,
+      'message': "More about dsg!",
+      'list_cards': false,
+      'cards': null,
+    },
   ]
   return (
     <>
