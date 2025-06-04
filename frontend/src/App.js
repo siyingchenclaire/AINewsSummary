@@ -108,6 +108,7 @@ function App() {
         }}
         variant="permanent"
         anchor="left"
+        containerStyle={{transform: 'none'}}
       >
         <Toolbar>
         </Toolbar>
