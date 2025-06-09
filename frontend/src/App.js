@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './routing/Home';
-import About from './routing/About';
-import Test from './routing/Test';
+import News from './routing/News';
+import Subscription from './routing/Subscription';
+import Report from './routing/Report';
+import Card from './routing/Card';
 import './App.css';
 
 import * as React from 'react';
-import { useLocation } from "react-router-dom";
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
@@ -20,31 +19,81 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
-import InboxIcon from '@mui/icons-material/Inbox';
-import MailIcon from '@mui/icons-material/Mail';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
 
 const drawerWidth = 240;
 const routing = {
-  'Home':'/',
-  'About':'/about',
-  'Test':'/test'
+  'News Feed':{
+    'routing': '/',
+    'logo': 'feed.svg'
+  },
+  'Subscription':{
+    'routing': '/subscription',
+    'logo': 'subscription.svg'
+  },
+  'Reports':{
+    'routing': '/report',
+    'logo': 'report.svg'
+  },
+  'Intelligence Cards':{
+    'routing': '/card',
+    'logo': 'intelligence.svg'
+  }
+}
+const topics = {
+  'Artificial Intelligence':'',
+  'Semiconductors':'',
+  'Cloud Computing':'',
+  'Cybersecurity':''
 }
 
 function App() {
   return (
-    <Box className="App" sx={{ display: 'flex' }}>
+    <Box className="App" sx={{ display: 'flex'}}>
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        sx={{ 
+          width: `100%`, 
+          margin: '0',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor:'#27303C',
+        }}
       >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            AI News Summary
-          </Typography>
+        <Toolbar sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+            <DonutSmallOutlinedIcon sx={{marginRight:'10px'}} fontSize="large"/>
+            <Typography variant="h6" noWrap component="div">
+              Tech Pulse AI
+            </Typography>
+          </Box>
+          <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '40%'}}>
+            <Paper
+              component="form"
+              sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                width: '100%', 
+                marginRight:'10px',
+                border:0
+              }}
+            >
+              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                <SearchIcon/>
+              </IconButton>
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search..."
+                inputProps={{ 'aria-label': 'search bar' }}
+              />
+            </Paper>
+            <AccountCircleIcon fontSize="large"/>
+          </Box>
         </Toolbar>
       </AppBar>
       
@@ -54,39 +103,29 @@ function App() {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
+            boxSizing: 'border-box'
+          }
         }}
         variant="permanent"
         anchor="left"
+        containerStyle={{transform: 'none'}}
       >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
         </Toolbar>
 
         <Divider />
 
-        <List
-          subheader={<ListSubheader sx={{display: 'flex' }}>Menu</ListSubheader>}
-        >
+        <List>
           {Object.keys(routing).map((key, index) => (
             <ListItem key={key} disablePadding>
               <ListItemButton 
-                href={routing[key]} 
+                href={routing[key].routing} 
                 variant="outlined" 
                 size="large" 
                 sx={{width: drawerWidth}}
               >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <HomeIcon /> : <MailIcon />}
+                    <img src={routing[key].logo} />
                 </ListItemIcon>
                 <ListItemText primary={key} />
               </ListItemButton>
@@ -94,33 +133,32 @@ function App() {
           ))}
         </List>
 
-        <Divider />
-
-        <List
-          subheader={<ListSubheader sx={{display: 'flex' }}>Newsletter</ListSubheader>}
+        <Box
+          component="footer"
+          style={{position:'fixed', bottom:0, left: 0, width:drawerWidth}}
         >
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+          <Divider sx={{width: '80%', marginLeft: '10%'}}/>
+          <Typography sx={{paddingTop:1}} color="textSecondary">PATENT Certificate</Typography>
+          <Typography sx={{paddingBottom:2}} fontSize='small' color="textDisabled"><a href="https://siyingchenclaire.github.io/siying.github.io/">Siying Chen</a> @2025</Typography>
+        </Box>
       </Drawer>
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3,  width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        sx={{ flexGrow: 1,  
+          p: 3,  
+          width: `calc(100% - ${drawerWidth}px)`, 
+          ml: `${drawerWidth}px`,
+          bgcolor: '#FBFBFC',
+          mt:'60px'
+        }}
       >
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/test" element={<Test />} />
+            <Route path="/" element={<News />} />
+            <Route path="/card" element={<Card />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/subscription" element={<Subscription />} />
           </Routes>
         </Router>
       </Box>
