@@ -5,6 +5,16 @@ TechPulse AI is an AI-powered chatbot designed for the CEO office of technology 
 
 ![System Design](./frontend/public/system.png)
 
+## Demo
+Manage your subscription!
+![Subscription Page](./frontend/public/demo-subscription.png)
+
+Keep track of your news gallery!
+![Reports Page](./frontend/public/demo-report.png)
+
+Find your ideal news items!
+![Cards Page](/frontend/public/demo-cards.png)
+
 ## Who is it for?
 CEOs and Executive Assistants
 Strategic and Investment Analysts
