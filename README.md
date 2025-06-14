@@ -1,4 +1,4 @@
-# TechPulse AI: Strategic Intelligence Assistant
+# TechPulse AI: Strategic Intelligence Assistant Chatbot
 
 ## Overview
 TechPulse AI is an AI-powered chatbot designed for the CEO office of technology companies. Its core purpose is to provide daily strategic intelligence on tech news by automatically tracking, summarizing, and generating insights. This helps strategic analysts and decision-makers stay informed with real-time information for faster, smarter decisions.
