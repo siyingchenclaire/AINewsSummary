@@ -5,8 +5,10 @@ import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
 import CardItem from "../utils/CardItem";
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import NewsItem from "./NewsItem";
 
 export default function News(){
+  const [open, setOpen] = useState(false);
 
   const messageList=[
     {
@@ -73,7 +75,11 @@ export default function News(){
                   {messageJSON['list_cards_title']}
                 </Typography>
                 {messageJSON['cards'].map(card => (
-                  <CardItem variant="outlined" sx={{textAlign:"left", mb:"10px"}}>
+                  <CardItem 
+                  variant="outlined" 
+                  sx={{textAlign:"left", mb:"10px"}} 
+                  onClick={() => setOpen(!open)}
+                  >
                     <Typography variant="h6" gutterBottom color="" sx={{}}>
                       {card['title']}
                     </Typography>
@@ -90,6 +96,7 @@ export default function News(){
           </Box>
         ))
       }
+      <NewsItem state = {{open}}></NewsItem>
       <TextField label="" variant="outlined" multiline
       sx={{position:"fixed", bottom:"20px", left:"20%", width:"80%", bgcolor:"#FFF"}}
       />
