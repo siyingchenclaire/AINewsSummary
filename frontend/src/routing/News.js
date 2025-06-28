@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
@@ -45,6 +45,7 @@ export default function News(){
       'cards': null,
     },
   ]
+
   return (
     <>
       {
