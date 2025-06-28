@@ -1,11 +1,13 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+from database import getNews, getConnection
+import mysql.connector
 
 server = Flask(__name__)
 CORS(server)
 
 @server.route('/api/server', methods=['GET'])
-def get_data():
+def getdata():
     sample_data = {
         'id': x,
         'message': y,
@@ -13,6 +15,20 @@ def get_data():
         'status': y
     }
     return jsonify(sample_data)
+
+@server.route('/getnews', methods=['GET'])
+def getnews():
+    try:
+        connection = getConnection()
+        results = getNews(connection)
+        return jsonify(results)
+
+    except mysql.connector.Error as err:
+        return jsonify({"error": str(err)}), 500
+
+    finally:
+        if connection:
+            connection.close()
 
 if __name__ == '__main__':
     server.run(debug=True)
