@@ -2,10 +2,10 @@ import { useState } from "react";
 import Box from '@mui/material/Box';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
-import CardItem from "../utils/CardItem";
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import NewsItem from "./NewsItem";
+import CardItem from "../utils/CardItem";
 
 export default function News(){
   const [open, setOpen] = useState(false);
@@ -75,28 +75,14 @@ export default function News(){
                   {messageJSON['list_cards_title']}
                 </Typography>
                 {messageJSON['cards'].map(card => (
-                  <CardItem 
-                  variant="outlined" 
-                  sx={{textAlign:"left", mb:"10px"}} 
-                  onClick={() => setOpen(!open)}
-                  >
-                    <Typography variant="h6" gutterBottom color="" sx={{}}>
-                      {card['title']}
-                    </Typography>
-                    <Typography variant="subtitle2" gutterBottom sx={{}}>
-                      {card['source']}
-                    </Typography>
-                    <Typography variant="body1" gutterBottom sx={{}}>
-                      {card['description']}
-                    </Typography>
-                  </CardItem>
+                  <NewsItem card={card}/>
                 ))}
               </Box>
             )}
           </Box>
         ))
       }
-      <NewsItem state = {{open}}></NewsItem>
+
       <TextField label="" variant="outlined" multiline
       sx={{position:"fixed", bottom:"20px", left:"20%", width:"80%", bgcolor:"#FFF"}}
       />

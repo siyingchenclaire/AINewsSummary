@@ -7,10 +7,10 @@ CORS(server)
 @server.route('/api/server', methods=['GET'])
 def get_data():
     sample_data = {
-        'id': 1,
-        'message': 'Hello from the backend!',
-        'items': ['apple', 'banana', 'cherry'],
-        'status':'success'
+        'id': x,
+        'message': y,
+        'items': z,
+        'status': y
     }
     return jsonify(sample_data)
 
