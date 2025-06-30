@@ -3,6 +3,10 @@ import News from './routing/News';
 import Subscription from './routing/Subscription';
 import Report from './routing/Report';
 import Card from './routing/Card';
+import Email from './routing/Email';
+import Login from './routing/Login';
+import Signup from './routing/Signup';
+import Reset from './routing/Reset';
 import './App.css';
 
 import * as React from 'react';
@@ -43,6 +47,10 @@ const routing = {
   'Intelligence Cards':{
     'routing': '/card',
     'logo': 'intelligence.svg'
+  },
+  'Email Notification':{
+    'routing':'/email',
+    'logo':'email.svg'
   }
 }
 const topics = {
@@ -56,6 +64,7 @@ function App() {
   return (
     <Box className="App" sx={{ display: 'flex'}}>
       <CssBaseline />
+      {/* Top menu */}
       <AppBar
         position="fixed"
         sx={{ 
@@ -97,6 +106,7 @@ function App() {
         </Toolbar>
       </AppBar>
       
+      {/* Side bar */}
       <Drawer
         sx={{
           width: drawerWidth,
@@ -159,6 +169,10 @@ function App() {
             <Route path="/card" element={<Card />} />
             <Route path="/report" element={<Report />} />
             <Route path="/subscription" element={<Subscription />} />
+            <Route path="/email" element={<Email />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/reset" element={<Reset />} />
           </Routes>
         </Router>
       </Box>
