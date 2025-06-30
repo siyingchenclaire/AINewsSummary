@@ -11,8 +11,8 @@ def getConnection():
     return mysql.connector.connect(
         host="localhost",       # or your DB server address
         user="root",   # e.g., "root"
-        password="011129",
-        database="mitnews"
+        password="",
+        database=""
     )
 
 @server.route('/api/server', methods=['GET'])
