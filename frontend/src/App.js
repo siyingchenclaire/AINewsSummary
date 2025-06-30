@@ -26,6 +26,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
@@ -104,7 +105,7 @@ function App() {
                 border:0
               }}
             >
-              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+              <IconButton type="button" sx={{ p: '10px'}} aria-label="search" disabled>
                 <SearchIcon/>
               </IconButton>
               <InputBase
@@ -112,6 +113,9 @@ function App() {
                 placeholder="Search..."
                 inputProps={{ 'aria-label': 'search bar' }}
               />
+              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                <ChevronRightIcon/>
+              </IconButton>
             </Paper>
             <IconButton
                 size="large"
